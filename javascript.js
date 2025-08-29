@@ -1,13 +1,21 @@
-let button = document.querySelector('.Boton');
-let titulo = document.querySelector('h1');
+let toggleBtn = document.getElementById("toggle-theme");
+let body = document.body;
 
-button.addEventListener('click', () => {
-    let colorElegido = prompt('Elegí un color para el fondo del título.\nEj: "red", "green", "lightblue", etc.');
+// Recuperar el modo guardado
+if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    toggleBtn.textContent = "☀️ Modo Claro";
+}
 
-    if (colorElegido) {
-        titulo.style.backgroundColor = colorElegido;
-        titulo.style.color = 'white';
+// Cambiar tema al hacer clic
+toggleBtn.addEventListener("click", () => {
+    body.classList.toggle("dark");
+
+    if (body.classList.contains("dark")) {
+        toggleBtn.textContent = "☀️ Modo Claro";
+        localStorage.setItem("theme", "dark");
     } else {
-        alert('No se ingresó ningún color.');
+        toggleBtn.textContent = "🌙 Modo Oscuro";
+        localStorage.setItem("theme", "light");
     }
 });
